@@ -40,6 +40,7 @@ int main()
     if(size > 0)
     {
         Pracownik *Pracownicy = new Pracownik[size];
+        int *Pensje = new int[size];
 
         vector<Pracownik> Vpracownicy;
 
@@ -48,7 +49,9 @@ int main()
             int pensja = 0;
             int indexszef = 0;
             cin >> Pracownicy[i].indexszef;
+            //--Pracownicy[i].indexszef;
             cin >> Pracownicy[i].pensja;
+            Pensje[i] = Pracownicy[i].pensja;
             Pracownicy[i].indexwlasny = i + 1;
 
             Vpracownicy.push_back(Pracownicy[i]);
@@ -56,16 +59,16 @@ int main()
 
         sort(Vpracownicy.begin(), Vpracownicy.end(), porownajPracownikowSzef);
 
-        for(int i = 0; i < Vpracownicy.size(); ++i)
-        {
-            printf("%d, %d, %d\n", Vpracownicy[i].indexwlasny, Vpracownicy[i].indexszef, Vpracownicy[i].pensja);
-        }
+        //for(int i = 0; i < Vpracownicy.size(); ++i)
+        //{
+        //    printf("%d, %d, %d\n", Vpracownicy[i].indexwlasny, Vpracownicy[i].indexszef, Vpracownicy[i].pensja);
+        //}
 
-        printf("\n");
-        for(int i = 0; i < size; ++i)
-        {
-            printf("%d, %d, %d\n", Pracownicy[i].indexwlasny, Pracownicy[i].indexszef, Pracownicy[i].pensja);
-        }
+        //printf("\n");
+        //for(int i = 0; i < size; ++i)
+        //{
+        //    printf("%d, %d, %d\n", Pracownicy[i].indexwlasny, Pracownicy[i].indexszef, Pracownicy[i].pensja);
+        //}
 
         bool *czy = new bool[size]{false}; 
         for(int i = 0, ostatni = 0, flag = 0; i < Vpracownicy.size(); ++i)
@@ -90,13 +93,25 @@ int main()
             if(!czy[i]) v.push_back(Vpracownicy[i]);
         }
 
-        printf("\n");
+        //printf("\n");
+        //for(int i = 0; i < v.size(); ++i)
+        //{
+         //   printf("%d, %d, %d\n", v[i].indexwlasny, v[i].indexszef, v[i].pensja);
+        //}
+
         for(int i = 0; i < v.size(); ++i)
         {
-            printf("%d, %d, %d\n", v[i].indexwlasny, v[i].indexszef, v[i].pensja);
+            if(v[i].pensja == 0)
+            {
+                if(Pensje[v[i].indexszef - 1] != 0) Pensje[v[i].indexwlasny - 1] = Pensje[v[i].indexszef - 1]-1;
+            }
+        }
+        //printf("\n");
+        for(int i = 0; i < size; ++i)
+        {
+            printf("%d\n", Pensje[i]);
         }
     }
-
 
     return 0;
 }
