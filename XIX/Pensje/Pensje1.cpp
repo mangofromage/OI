@@ -18,11 +18,13 @@ bool porownajPracownikowSzef(const Pracownik &a, const Pracownik &b)
     return a.indexszef < b.indexszef; 
 }
 
-void WywalPowtorzenia(vector<Pracownik> wektro)
+vector<Pracownik> liczpow(vector<Pracownik> wektro)
 {
+    
     for(int i = 0, ostatni = 0; i < wektro.size(); ++i)
     {
-        if(wektro[i].indexszef == ostatni) wektro.pop_back();
+        if(wektro[i].indexszef == ostatni) wektro.erase(wektro.begin() + i);
+        ostatni = wektro[i].indexszef;
     }
 }
 
@@ -47,14 +49,14 @@ int main()
             int indexszef = 0;
             cin >> Pracownicy[i].indexszef;
             cin >> Pracownicy[i].pensja;
-            Pracownicy[i].indexwlasny = i;
+            Pracownicy[i].indexwlasny = i + 1;
 
             Vpracownicy.push_back(Pracownicy[i]);
         }
 
         sort(Vpracownicy.begin(), Vpracownicy.end(), porownajPracownikowSzef);
 
-        for(int i = 0; i < size; ++i)
+        for(int i = 0; i < Vpracownicy.size(); ++i)
         {
             printf("%d, %d, %d\n", Vpracownicy[i].indexwlasny, Vpracownicy[i].indexszef, Vpracownicy[i].pensja);
         }
@@ -63,6 +65,35 @@ int main()
         for(int i = 0; i < size; ++i)
         {
             printf("%d, %d, %d\n", Pracownicy[i].indexwlasny, Pracownicy[i].indexszef, Pracownicy[i].pensja);
+        }
+
+        bool *czy = new bool[size]{false}; 
+        for(int i = 0, ostatni = 0, flag = 0; i < Vpracownicy.size(); ++i)
+        {
+            if(ostatni == Vpracownicy[i].indexszef)
+            {
+                czy[i] = true;
+                if(flag == 0) 
+                {
+                    czy[i - 1] = true;
+                    flag = 1;
+                }
+            }
+            else flag = 0;
+            ostatni = Vpracownicy[i].indexszef;
+        }
+
+        vector<Pracownik> v;
+
+        for(int i = 0; i < Vpracownicy.size(); ++i)
+        {
+            if(!czy[i]) v.push_back(Vpracownicy[i]);
+        }
+
+        printf("\n");
+        for(int i = 0; i < v.size(); ++i)
+        {
+            printf("%d, %d, %d\n", v[i].indexwlasny, v[i].indexszef, v[i].pensja);
         }
     }
 
