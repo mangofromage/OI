@@ -12,12 +12,16 @@ int main()
     int *szef = new int[bsize]{0};
     int *liczbaPodwladnych = new int[bsize]{0};
     int *pensja = new int[bsize]{0};
+    int *klucze = new int[bsize]{0};
 
     for(int i = 1; i < bsize; ++i)
     {
         cin >> szef[i];
         cin >> pensja[i];
+        klucze[pensja[i]] = i;
     }
+
+    klucze[0] = 0;
 
     for(int i = 1; i < bsize; ++i)
     {
