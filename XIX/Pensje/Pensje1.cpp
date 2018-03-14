@@ -82,7 +82,7 @@ int main()
         bool *czy = new bool[size]{false}; 
         for(int i = 0, ostatni = 0, flag = 0; i < Vpracownicy.size(); ++i)
         {
-            if(ostatni == Vpracownicy[i].indexszef && Vpracownicy[i].pensja == 0)
+            if(ostatni == Vpracownicy[i].indexszef && Vpracownicy[i].pensja != 0)
             {
                 czy[i] = true;
                 if(flag == 0) 
