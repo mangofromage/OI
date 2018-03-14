@@ -24,6 +24,26 @@ int main()
         if(szef[i] == i) pensja[i] = size;
         ++liczbaPodwladnych[szef[i]];
     }
+
+    for(int i = 1; i < bsize; ++i)
+    {
+        if(liczbaPodwladnych[szef[i]] == 1)
+        {
+            if(pensja[szef[i]] != 0)
+            {
+                pensja[i] = pensja[szef[i]] - 1;
+            }
+            else if(pensja[i] != 0)
+            {
+                pensja[szef[i]] = pensja[i] + 1;
+            }
+        }
+    }
+
+    for(int i = 1; i < bsize; ++i)
+    {
+        printf("%d\n", pensja[i]);
+    }
    
     return 0;
 }
