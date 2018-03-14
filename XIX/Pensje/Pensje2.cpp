@@ -29,11 +29,11 @@ int main()
     {
         if(liczbaPodwladnych[szef[i]] == 1)
         {
-            if(pensja[szef[i]] != 0)
+            if(pensja[szef[i]] != 0 && pensja[szef[i]] != size)
             {
                 pensja[i] = pensja[szef[i]] - 1;
             }
-            else if(pensja[i] != 0)
+            else if(pensja[i] != 0 && pensja[szef[i]] != size)
             {
                 pensja[szef[i]] = pensja[i] + 1;
             }
