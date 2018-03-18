@@ -148,8 +148,7 @@ int main()
 
                     for(int i = 1; i < rozmiar - 1; ++i) 
                     {
-                       czywolny[i] = -1;
-                        if(wolne.size() > 0) wolne.pop_back();
+                        czywolny[i] = -1;
                     }
                 }
             }
