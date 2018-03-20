@@ -9,17 +9,15 @@ int ile1(int *wys, int n)
     //for(int i =0 ; i < n; ++i) cout << wys[i] << endl;
     int ile = 0;
     
-    for(int i = 0, c = 0; i < n; ++i)
+    for(int i = 0, c = wys[0]; i < n; ++i)
     {
-        if(i == 0) c = wys[i];
-        int k = i;
-        for(; wys[i] == c; ++i);
-        if(k < i) ++ile;
         c = wys[i];
+        int k = i;
+        for(; wys[i] == c && i < n; ++i);
+        if(k < i) ++ile;
+        //c = wys[++i];
     }
-
-    
-
+    cout << ile << endl;
     return n - ile;
 }
 
