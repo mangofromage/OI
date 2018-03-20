@@ -2,24 +2,7 @@
 #include <vector>
 using namespace std;
 
-int ile(int *wys, int n)
-{
-    vector<int> s;
-    int ile = 0;
-    for(int i = 0; i < n; ++i)
-    {
-        for(;s.size() > 0 && s.back() > wys[i];)
-        {
-            s.pop_back();
-        }
-        if(s.size() == 0 || s.back() < wys[i])
-        {
-            s.push_back(wys[i]);
-            ++ile;
-        }
-    }
-    return ile;
-}
+int wys[1000000];
 
 int main()
 {
@@ -30,15 +13,25 @@ int main()
     cin >> n;
     if(n == 0) return 0;
 
-    int *wysokosci = new int[n];
-
+    int bez = 0;
+    vector<int> s;
+    int ile = 0;
+    
     for(int i = 0; i < n; ++i)
     {
-        int bezuzyteczna = 0;
-        cin >> bezuzyteczna;
-        cin >> wysokosci[i];
+        cin >>bez;
+        cin >> wys[i];
+        for(;s.size() > 0 && s.back() > wys[i];)
+        {
+            s.pop_back();
+        }
+        if(s.size() == 0 || s.back() < wys[i])
+        {
+            s.push_back(wys[i]);
+            ++ile;
+        }
     }
 
-    cout << ile(wysokosci, n) << endl;
+    cout << ile << endl;
     return 0;
 }
