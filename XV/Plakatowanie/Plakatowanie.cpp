@@ -3,19 +3,23 @@
 #include <vector>
 using namespace std;
 
-int ile1(int *wys, int n)
+int ile(int *wys, int n)
 {
-    sort(wys, wys + n);
-    //for(int i =0 ; i < n; ++i) cout << wys[i] << endl;
+    vector<int> s;
     int ile = 0;
-    
-    for(int i = 1; i < n; ++i)
+    for(int i = 0; i < n; ++i)
     {
-        int k = i;
-        for(; wys[i] == wys[i - 1] && i < n; ++i);
-        if(k < i) ++ile;
+        for(;s.size() > 0 && s.back() > wys[i];)
+        {
+            s.pop_back();
+        }
+        if(s.size() == 0 || s.back() < wys[i])
+        {
+            s.push_back(wys[i]);
+            ++ile;
+        }
     }
-    return n - ile;
+    return ile;
 }
 
 int main()
@@ -36,6 +40,6 @@ int main()
         cin >> wysokosci[i];
     }
 
-    cout << ile1(wysokosci, n) << endl;
+    cout << ile(wysokosci, n) << endl;
     return 0;
 }
