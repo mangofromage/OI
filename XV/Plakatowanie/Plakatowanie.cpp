@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 int ile1(int *wys, int n)
@@ -7,13 +8,17 @@ int ile1(int *wys, int n)
     sort(wys, wys + n);
     //for(int i =0 ; i < n; ++i) cout << wys[i] << endl;
     int ile = 0;
-    for(int i = 0; i < n; ++i)
+    
+    for(int i = 0, c = 0; i < n; ++i)
     {
-        if(i > 0)
-        {
-            if(wys[i] == wys[i - 1]) ++ile;
-        }
+        if(i == 0) c = wys[i];
+        int k = i;
+        for(; wys[i] == c; ++i);
+        if(k < i) ++ile;
+        c = wys[i];
     }
+
+    
 
     return n - ile;
 }
