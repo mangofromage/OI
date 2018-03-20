@@ -1,23 +1,21 @@
 #include <iostream>
-
+#include <algorithm>
 using namespace std;
 
-int ile(int *wys, int n, int indeks)
+int ile1(int *wys, int n)
 {
-    int min = 1 << 31;
-    
-    int k = indeks;
-    for(int i = indeks; wys[i] != 0; ++i, ++k)
+    sort(wys, wys + n);
+    //for(int i =0 ; i < n; ++i) cout << wys[i] << endl;
+    int ile = 0;
+    for(int i = 0; i < n; ++i)
     {
-        if(wys[i] < min && wys[i] != 0) min = wys[i];
-    }
-    for(int i = indeks; i < k; ++i)
-    {
-        wys[i] -= min;
+        if(i > 0)
+        {
+            if(wys[i] == wys[i - 1]) ++ile;
+        }
     }
 
-    if(indeks < n) return 1 + ile(wys, n, k + 1);
-    return 1;
+    return n - ile;
 }
 
 int main()
@@ -26,7 +24,7 @@ int main()
     cin.tie(0);
 
     int n = 0;
-    cin >>n;
+    cin >> n;
     if(n == 0) return 0;
 
     int *wysokosci = new int[n];
@@ -38,6 +36,6 @@ int main()
         cin >> wysokosci[i];
     }
 
-    cout << ile(wysokosci, n, 0) << endl;
+    cout << ile1(wysokosci, n) << endl;
     return 0;
 }
