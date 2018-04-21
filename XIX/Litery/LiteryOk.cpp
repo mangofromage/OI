@@ -56,8 +56,8 @@ int main()
     cin >> size;
     int Tsize = 1 << NearestPowTwo(size);
     
-    char *Jas = new char[size];
-    char *Malgosia = new char[size];
+    char *Jas = new char[size + 1];
+    char *Malgosia = new char[size + 1];
     
     cin >> Jas;
     cin >> Malgosia;
