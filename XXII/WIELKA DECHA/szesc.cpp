@@ -118,6 +118,6 @@ int main()
     wynik = max(wynik, j - i + 1);
   }
   cout << wynik - 1 << '\n';
-  cout << "L " << lenght << '\n';
+  //cout << "L " << lenght << '\n';
   return 0;
 }
