@@ -11,35 +11,22 @@ void printLvl(int c, int val)
 
 void PrintTree(int base, int tree[])
 {
-  int lvl = 1;
-  int i = 1;
-  int u = 1;
-  while(lvl < 2 * base)
+  int lastp = 1;
+  int last = base - 1;
+  printLvl(last, tree[1]);
+  printf("\n");
+
+  for(int i = 2; i < 2 * base;)
   {
-    for(int k = 0; k < lvl; ++k)
+    int si = i;
+    for(;i < si + 2 * lastp; ++i)
     {
-      int space = 0;
-      if(k == 0) space = base / lvl - 1;
-      else if(lvl > 0)
-      {
-        if(u % 2 == 0)
-        {
-          if(k % 2 == 0) space = (base / (lvl - 1));
-          else space = (base / (lvl - 1)) - 1;
-        }
-        else
-        {
-          space = (base / (lvl - 1)) + 1;
-        }
-      }
-      if(base == lvl && k == 0) space = 0;
-      else if(base == lvl) space = 1;
-      printLvl(space , tree[i]);
-      ++i;
+      if(i == si) printLvl(last / 2, tree[i]);
+      else printLvl(last, tree[i]);
     }
-    ++u;;
-    lvl *= 2;
     printf("\n");
+    last /= 2;
+    lastp *= 2;
   }
 }
 
@@ -108,7 +95,7 @@ int main()
     litery[int(malgosia[i])].pop();
     wynik += index + query(index, base, tree) - i;
   }
-  //PrintTree(base, tree);
-  cout << wynik << '\n';
+  PrintTree(base, tree);
+  //cout << wynik << '\n';
   return 0;
 }
