@@ -95,7 +95,7 @@ int main()
     litery[int(malgosia[i])].pop();
     wynik += index + query(index, base, tree) - i;
   }
-  PrintTree(base, tree);
-  //cout << wynik << '\n';
+  //PrintTree(base, tree);
+  cout << wynik << '\n';
   return 0;
 }
