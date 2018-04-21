@@ -29,12 +29,9 @@ void PrintTree(int base, int tree[])
         }
         else
         {
-          //if(k % 2 == 0) space = (base / (lvl - 1));
-          //else space = (base / (lvl - 1)) + 1;
           space = (base / (lvl - 1)) + 1;
         }
       }
-      //int space = (base / lvl) - 1 + k * ((base / lvl) - 1);
       if(base == lvl && k == 0) space = 0;
       else if(base == lvl) space = 1;
       printLvl(space , tree[i]);
@@ -57,7 +54,6 @@ void insert(int index, int base, int tree[])
 {
   int x = index + base;
   tree[x] = 1;
-  //printf("pop\n");
   while(x > 1)
   {
     x/=2;
@@ -72,7 +68,6 @@ int query(int index, int base, int tree[])
   if(lx == px) return tree[lx];
   if(lx > px) return 0;
   int count = tree[lx] + tree[px];
-  //printf("quer\n");
   while (lx / 2 != px / 2)
   {
     if(lx % 2 == 0) count += tree[lx + 1];
@@ -92,20 +87,16 @@ int main()
   char *jas = new char[n + 1];
   char *malgosia = new char[n + 1];
   int base = npow(n);
-  //printf("%d\n", base);
-  //printf("bob\n");
   int *tree = new int[2 * base];
   queue<int> litery[26];
 
   cin >> jas;
   cin >> malgosia;
-  //printf("bob\n");
   for(int i = 0; i < n; ++i)
   {
     jas[i] -= 65;
     litery[int(jas[i])].push(i);
   }
-  //printf("bob\n");
 
   long long wynik = 0;
 
