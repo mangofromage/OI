@@ -125,12 +125,20 @@ protected:
   {
     string pa = "";
     string name = "";
-    int i = path.size() - 1;
+    bool is = false;
+    int i = 0;
+    for(; i < path.size(); ++i)
+    {
+      if(path[i] == '/')is = true;
+    }
+
+    i = path.size() - 1;
     for(; i >= 0 && path[i] != '/'; --i)
     {
       name = path[i] + name;
     }
     pa = cutLast(path, path.size() - i);
+    if(is) pa += "/";
     cout << "name " << name << "\npath " << pa << endl;
     return make_pair(name, pa);
   }
@@ -226,7 +234,7 @@ public:
 void Program::Compile()
 {
   compiledName = cutLast(filename, 4);
-  string compileString = "g++ -Wall -std=c++11 " + filename + " -o " + compiledName;
+  string compileString = "g++ -Wall -std=c++11 " + path + filename + " -o " + compiledName;
   cout << "Compiling file" << endl;
   cout << compileString << endl;
   if(system(compileString.c_str()) != 0) close("Error durning compilation.");
@@ -237,13 +245,13 @@ void Program::RunTests()
 {
   for(int i = 0; i < ioFileNames.size(); ++i)
   {
-    string command = "./" + compiledName + "<in/" + ioFileNames[i].first;
+    string command = "./" + compiledName + "<" + path + "in/" + ioFileNames[i].first;
     cout << ioFileNames[i].first << endl;
     string result = exec(command.c_str());
     result = removeLastWhiteChars(result);
     cout << "output   " << result << endl;
 
-    string outfile = "out/" + ioFileNames[i].second;
+    string outfile = path + "out/" + ioFileNames[i].second;
     ifstream t(outfile.c_str());
     string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
     string response = removeLastWhiteChars(str);
