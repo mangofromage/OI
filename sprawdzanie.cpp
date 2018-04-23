@@ -224,18 +224,19 @@ class Program : public IOfiles
 void Program::ShowOutput()
 {
     sort(results.begin(), results.end());
-    printf("%12s%12s\n", "Passed", "Failed");
+    printf("%16s%16s\n", "Passed", "Failed");
     for(int i = 0; i < results.size(); ++i)
     {
         if(results[i].second)
         {
-            printf("%12s%12s\n", results[i].first.c_str(), " ");
+            printf("%16s%16s\n", results[i].first.c_str(), " ");
         }
         else
         {
-            printf("%12s%12s\n", " ", results[i].first.c_str());
+            printf("%16s%16s\n", " ", results[i].first.c_str());
         }
     }
+    cout.flush();
 }
 
 void Program::Compile()
