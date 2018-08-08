@@ -7,3 +7,4 @@ XVII/Gra w Minima/out
 out
 *.in
 *.json
+.vscode*
